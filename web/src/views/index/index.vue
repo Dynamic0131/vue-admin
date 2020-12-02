@@ -1,19 +1,35 @@
 <template>
-    <div class="amap-wrap">
-        <el-amap vid="amapDemo" :center="center" :zoom="zoom" class="amap-demo"></el-amap>
+    <div>
+        <Cars />
+        <Map />
+        <!-- 会员 -->
+        <div id="children-view">
+            <router-view />
+        </div>
     </div>
 </template>
 <script>
+import Map from "../amap"
+import Cars from "../cars"
 export default {
     name: "Index",
+    components: {
+        Map,
+        Cars
+    },
     data(){
-        return {
-            zoom: 12,
-            center: [116.404765, 39.918052]
-        }
+        return {}
     }
 }
 </script>
 <style lang="scss">
-.amap-wrap { height: 100vh; }
+#children-view {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 101;
+    width: 410px;
+    background-color: #34393f;
+}
 </style>
