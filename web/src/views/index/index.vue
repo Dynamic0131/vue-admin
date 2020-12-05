@@ -1,34 +1,44 @@
 <template>
     <div>
         <!-- cars data渲染 -->
-        <Cars />
+        <!-- <Cars /> -->
         <!-- 地图 -->
         <Map />
+        <!-- 导航 -->
+        <Navbar />
         <!-- 会员 -->
-        <div id="children-view" :class="[show ? 'open' : '']">
+        <div id="children-view" :class="{open: show}">
             <router-view />
         </div>
     </div>
 </template>
 <script>
-import Map from "../amap/index";
-import Cars from "../cars/index";
+import Map from "../amap";
+import Cars from "../cars";
+import Navbar from "@c/navbar";
 export default {
     name: "Index",
-    components: { Map, Cars },
+    components: { Map, Cars, Navbar },
     data(){
-        return {
-            show: false
+        return {}
+    },
+    computed: {
+        show(){
+            const rotuer = this.$route;
+            return rotuer.name === "Index" ? false : true;
         }
     },
-    watch: {
-        "$route" :{
-            handler(newValue){
-                const routerName = newValue.name;
-                this.show = routerName === "Index" ? false : true;
+    mounted(){
+        document.addEventListener('mouseup', (e) => {
+            const userCon = document.getElementById("children-view");
+            if(userCon && !userCon.contains(e.target)) {
+                this.$router.push({
+                    name: "Index"
+                })
             }
-        }
-    }
+        })
+    },
+    watch: {}
 }
 </script>
 <style lang="scss">
@@ -40,11 +50,8 @@ export default {
     z-index: 101;
     width: 410px;
     background-color: #34393f;
-    -webkit-transition: all .3s ease 0s;
-    -moz-transition: all .3s ease 0s;
-    -ms-transition: all .3s ease 0s;
-    -o-transition: all .3s ease 0s;
-    transition: all .3s ease 0s;
+    @include webkit(transition, all .3s ease 0s);
+    @include webkit(box-shadow, -5px 0 38px 0 rgba(0, 0, 0, .4));
     &.open {
         right: 0;
     }
