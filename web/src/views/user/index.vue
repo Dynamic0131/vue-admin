@@ -6,11 +6,10 @@
 <script>
 export default {
     name: "User",
+    components: {},
     data(){
-        return {
-        }
+        return {}
     }
 }
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

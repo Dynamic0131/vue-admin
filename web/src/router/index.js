@@ -11,9 +11,9 @@ const routes = [
     component: Home,
     children: [
       {
-        path:"/user",
-        name : "User",
-        component: () => import("../views/user")
+        path: "/user",
+        name: "User",
+        component: () => import("../views/user/index")
       }
     ]
   }
